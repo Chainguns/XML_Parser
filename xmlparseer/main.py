@@ -40,6 +40,8 @@ myDict = {'session': []}
 myDict["session"].append(decoded_dict)
 
 formatted_data.append(myDict)
+
+#Format again to remove \ character but not \n - currently doesn't work 26.12
 with open('test3.json', 'a+') as json_f:
     content = json.dumps(formatted_data)
     new_content = re.sub(pattern=r'\\(?!n)', repl="", string=content)
