@@ -41,6 +41,5 @@ formatted_data.append(myDict)
 
 #Format again to remove \ character but not \n with regex
 with io.open('parsed.txt', 'a+', encoding='utf8') as f:
-    # content = json.dumps(formatted_data)
     new_content = re.sub(pattern=r'\\(?!n)', repl="", string=str(formatted_data))
     f.write(new_content)
