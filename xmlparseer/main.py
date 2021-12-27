@@ -45,7 +45,8 @@ formatted_data.append(myDict)
 
 
 
-#Format again to remove \ character but not \n with regex
+# Format again to remove \ character but not \n
+# In case of \\n, the regex pattern will be: \\(?!\\n)(?!n)
 with io.open('parsed.txt', 'a+', encoding='utf8') as f:
     new_content = re.sub(pattern=r'\\(?!n)', repl="", string=str(formatted_data))
     f.write(new_content)
