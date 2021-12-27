@@ -12,7 +12,7 @@ for request in df['request']:
     decodedStr = str(decoded_bytes, "utf-8")
     decodedStr.replace('\r\n', '\n')
     # According to https://stackoverflow.com/questions/31203259/python-write-valid-json-with-newlines-to-file \n is not valid in json
-    # In that case use the following line instead of the previous one
+    # In that case, or if the mapper requires new lines in the actual data in json format, use the following line instead of the previous one
     #decodedStr.replace('\r\n', '\\n')
     decoded_request = decodedStr
 
@@ -22,8 +22,8 @@ for response in df['response']:
     decoded_bytes = base64.b64decode(response)
     decodedStr = str(decoded_bytes, "utf-8")
     decodedStr.replace('\r\n', '\n')
-    # According to https://stackoverflow.com/questions/31203259/python-write-valid-json-with-newlines-to-file \n is not valid in json
-    # In that case use the following line instead of the previous one
+    # According to https://stackoverflow.com/questions/31203259/python-write-valid-json-with-newlines-to-file \n is not valid in json,
+    # In that case, or if the mapper requires new lines in the actual data in json format, use the following line instead of the previous one
     #decodedStr.replace('\r\n', '\\n')
     decoded_response = decodedStr
 
