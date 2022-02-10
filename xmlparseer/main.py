@@ -3,28 +3,27 @@ import base64
 import re
 import io
 
-
 df = pd.read_xml('juice_shop.xml')
 
 # Create new columns for the decoded request and response
 for request in df['request']:
     decoded_bytes = base64.b64decode(request)
-    decodedStr = str(decoded_bytes, "utf-8")
+    try:
+        decodedStr = str(decoded_bytes, "utf-8")
+    except:
+        decodedStr = str(decoded_bytes, "ISO-8859-1")
     decodedStr.replace('\r\n', '\n')
-    # According to https://stackoverflow.com/questions/31203259/python-write-valid-json-with-newlines-to-file \n is not valid in json
-    # In that case, or if the mapper requires new lines in the actual data in json format, use the following line instead of the previous one
-    #decodedStr.replace('\r\n', '\\n')
     decoded_request = decodedStr
 
 df['decoded_request'] = decoded_request
 
 for response in df['response']:
     decoded_bytes = base64.b64decode(response)
-    decodedStr = str(decoded_bytes, "utf-8")
+    try:
+        decodedStr = str(decoded_bytes, "utf-8")
+    except:
+        decodedStr = str(decoded_bytes, "ISO-8859-1")
     decodedStr.replace('\r\n', '\n')
-    # According to https://stackoverflow.com/questions/31203259/python-write-valid-json-with-newlines-to-file \n is not valid in json,
-    # In that case, or if the mapper requires new lines in the actual data in json format, use the following line instead of the previous one
-    #decodedStr.replace('\r\n', '\\n')
     decoded_response = decodedStr
 
 df['decoded_response'] = decoded_response
